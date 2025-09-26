@@ -5,7 +5,41 @@
   <title>Dynamic iframe with parameter</title>
 </head>
 <body>
- <iframe width="636" height="360" src="https://videocelebs.net/embed/95224" frameborder="0" allowfullscreen webkitallowfullscreen mozallowfullscreen oallowfullscreen msallowfullscreen></iframe>
+  <iframe
+    id="videoIframe"
+    width="636"
+    height="360"
+    src=""
+    frameborder="0"
+    allowfullscreen
+    webkitallowfullscreen
+    mozallowfullscreen
+    oallowfullscreen
+    msallowfullscreen
+  ></iframe>
 
+  <script>
+    // Get the 'number' parameter from the URL
+    const urlParams = new URLSearchParams(window.location.search);
+    const number = urlParams.get('number');
+
+    const iframe = document.getElementById('videoIframe');
+
+    if (number) {
+      iframe.src = `https://videocelebs.net/embed/${number}`;
+    } else {
+      // No number provided: fallback to default or show a message
+      // Option 1: default video number
+      iframe.src = "https://videocelebs.net/embed/95224";
+
+      // Option 2: show message instead of iframe (uncomment below if you want this)
+      /*
+      iframe.style.display = 'none';
+      */
+      const msg = document.createElement('p');
+      msg.textContent = 'Please provide a number parameter in the URL, e.g. ?number=12345';
+      document.body.appendChild(msg);
+    }
+  </script>
 </body>
 </html>
